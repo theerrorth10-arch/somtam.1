@@ -2,266 +2,215 @@
 <html lang="th">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>ร้านส้มตำแซ่บนัว</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#398344">
+<title>ร้านส้มตำแซ่บนัว | Somtam Arcade</title>
 <style>
-:root{--bg:#fff6df;--tx:#49351e;--card:#fff;--g:#398344;--gold:#f5bd45;--soft:#fff0c5;--ok:#e5f8df;--line:#e6dcc6;--res:#f1f9e8;--floor:#f3d9a4;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);color-scheme:light}
-@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#1d1810;--tx:#f2e6cf;--card:#2a2318;--soft:#3a2f1a;--ok:#244a2a;--line:#4a3f2a;--res:#26331f;--floor:#4a3b22;color-scheme:dark}}
-:root[data-theme="dark"]{--bg:#1d1810;--tx:#f2e6cf;--card:#2a2318;--soft:#3a2f1a;--ok:#244a2a;--line:#4a3f2a;--res:#26331f;--floor:#4a3b22;color-scheme:dark}
+:root{--green:#398344;--dark:#285d31;--gold:#f5bd45;--cream:#fff6df;--ink:#49351e;--red:#bd5545}
 *{box-sizing:border-box}
-html{scroll-padding-top:env(safe-area-inset-top,0px)}
-body{margin:0;touch-action:manipulation;-webkit-tap-highlight-color:transparent;-webkit-text-size-adjust:100%;font-family:"Sarabun","Noto Sans Thai",Arial,"Apple Color Emoji","Segoe UI Emoji","Noto Color Emoji",sans-serif;background:var(--bg);color:var(--tx)}
-header{background:var(--g);color:#fff;text-align:center;padding:16px 10px;border-bottom:5px solid var(--gold);position:relative}
-header h1{margin:0;font-size:26px}header p{margin:6px 0 0}
-#mute{position:absolute;right:10px;top:10px;padding:6px 10px;background:#0003}
-.container{max-width:950px;margin:auto;padding:12px}
-.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:12px}
-.stat,.panel{background:var(--card);padding:13px;border-radius:15px;box-shadow:0 3px 10px #0001}
-.stat{text-align:center;font-weight:bold;font-size:14px}.stat span{display:block;font-size:21px;color:var(--g)}
-.panel{margin-bottom:12px}h2{font-size:18px;margin:0 0 10px}
-.order{background:var(--soft);border-radius:14px;padding:14px;margin-bottom:12px}
-.order.vip{outline:3px solid #e8b100;background:linear-gradient(135deg,var(--soft),#ffe58a55)}
-#cust{font-size:20px;font-weight:bold}
-.big{font-size:44px;line-height:1}
-.tray{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:10px}
-.ing{-webkit-touch-callout:none;min-height:64px;border:2px solid var(--line);border-radius:12px;padding:8px 2px;background:var(--card);color:var(--tx);text-align:center;font-size:13px;cursor:grab;touch-action:none;user-select:none;font-weight:normal}
-.ing.sel{border-color:#39934a;background:var(--ok)}
-.ing .e{font-size:28px;display:block}
-.ghost{position:fixed;transform:translate(-50%,-130%);font-size:44px;pointer-events:none;z-index:99}
-#mortarBox{border-radius:16px;border:3px dashed transparent;text-align:center;transition:.15s}
-#mortarBox.over{border-color:var(--g);background:var(--ok)}
-#mortarSvg{width:100%;max-width:340px;height:auto}
-@keyframes pound{0%,100%{transform:translateY(-42px)}45%{transform:translateY(6px)}}
-#pestle{transform:translateY(-42px)}
-#pestle.pound{animation:pound .38s ease-in-out infinite}
-@keyframes shake{0%,100%{transform:translateX(0)}50%{transform:translateX(2px) scaleY(.98)}}
-#bowl.pound{animation:shake .38s infinite}
+body{margin:0;font-family:system-ui,Arial,sans-serif;background:var(--cream);color:var(--ink)}
+header{background:var(--green);color:#fff;text-align:center;padding:20px 12px;border-bottom:5px solid var(--gold)}
+header h1{margin:0;font-size:clamp(24px,5vw,34px)}header p{margin:7px 0 0}
+.container{max-width:1100px;margin:auto;padding:14px}
+.stats{display:grid;grid-template-columns:repeat(5,1fr);gap:9px;margin-bottom:14px}
+.stat,.panel,.orderbox{background:#fff;padding:14px;border-radius:15px;box-shadow:0 3px 10px #00000012}
+.stat{text-align:center;font-weight:700}.stat span{display:block;font-size:22px;color:var(--green);margin-top:4px}
+.panel{margin-bottom:14px}h2{font-size:19px;margin:0 0 11px}
+button{border:0;border-radius:10px;padding:10px 13px;background:var(--green);color:#fff;font-weight:700;cursor:pointer;font-size:14px}
+button:hover{filter:brightness(.95)}button:disabled{opacity:.4;cursor:not-allowed}
+.secondary{background:#d78b2d}.danger{background:var(--red)}.small{padding:7px 10px;font-size:12px}
+.main-btn{width:100%;font-size:18px;margin-top:13px;padding:13px}
+.top-actions,.menu-list{display:flex;flex-wrap:wrap;gap:8px}
+.mission{background:#fff0c5;border-radius:12px;padding:13px;margin-bottom:14px}
+.progress{height:12px;background:#eee;border-radius:20px;overflow:hidden}.progress div{height:100%;background:#50a74c;width:0%;transition:width .2s}
+.game-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:14px}
+.orderbox{background:#fff0c5;margin-bottom:10px;border:2px solid transparent}
+.orderbox.active-order{border-color:var(--green);background:#fff8e7}
+.order-head{display:flex;justify-content:space-between;gap:8px;align-items:center}
+.order-meta{font-size:13px;color:#765b37}.queue-actions{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+.badge{display:inline-block;background:#e5f4df;color:#286333;border-radius:20px;padding:3px 8px;font-size:12px;font-weight:700}
+.recipe{background:#fff8e7;border:2px dashed #e3ad45;border-radius:12px;padding:12px;margin-top:10px}
+.recipe-item{display:flex;justify-content:space-between;gap:10px;padding:5px 0;border-bottom:1px solid #eadfca}
+.recipe-item:last-child{border:0}
+.ingredients{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.ingredient{background:#fff;color:var(--ink);border:2px solid #eee;padding:9px 5px;text-align:center;min-height:82px}
+.ingredient.selected{border-color:var(--green);background:#e5f8df}
+.ingredient .emoji{font-size:26px;display:block}.ingredient small{display:block;color:#765b37}
 .controls{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-label{display:block;margin:8px 0 4px;font-weight:bold}
-input[type=range]{width:100%;accent-color:#398344}
-button{border:0;border-radius:10px;padding:11px 14px;min-height:44px;-webkit-user-select:none;user-select:none;background:var(--g);color:#fff;font-weight:bold;cursor:pointer;font-size:15px;font-family:inherit}
-button:disabled{opacity:.4;cursor:not-allowed}
-.main{width:100%;font-size:18px;margin-top:12px}
-.sec{background:#d78b2d}.danger{background:#bd5545}
-#result{text-align:center;background:var(--res);padding:12px;border-radius:12px;margin-top:10px;min-height:60px}
-#result svg{width:200px;max-width:70%;overflow:visible}
-@keyframes plateIn{0%{transform:translateX(-160px) rotate(-14deg);opacity:0}70%{transform:translateX(8px) rotate(2deg);opacity:1}100%{transform:none;opacity:1}}
-@keyframes dishDrop{0%{transform:translateY(-55px);opacity:0}60%{opacity:1}80%{transform:translateY(3px)}100%{transform:none;opacity:1}}
-@keyframes steam{0%{transform:translateY(8px);opacity:0}30%{opacity:.9}100%{transform:translateY(-14px);opacity:0}}
-@keyframes hop{0%,100%{transform:translateY(0) scale(1)}40%{transform:translateY(-14px) scale(1.25)}}
-.plate{animation:plateIn .55s ease-out both}
-.dish{animation:dishDrop .5s .45s ease-in both}
-.steamw{display:block;height:28px;font-size:24px;opacity:0;animation:steam 1.4s 1s ease-out 2}
-#face{display:inline-block}.hop{animation:hop .6s 2}
-.row{display:flex;flex-wrap:wrap;gap:8px}
-.row button{background:#d78b2d;font-size:14px}.row button.own{background:#6a9a5a}
-#scene{background:var(--floor);border-radius:14px;padding:12px;font-size:30px;text-align:center;line-height:1.5;margin-bottom:10px;border-bottom:6px solid #a8743a}
-.log{max-height:120px;overflow:auto;font-size:14px;line-height:1.8}
-.bar{height:12px;background:var(--line);border-radius:20px;overflow:hidden}.bar div{height:100%;background:#50a74c;width:0}
-#toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:#000c;color:#fff;padding:10px 16px;border-radius:20px;z-index:100;opacity:0;transition:.25s;pointer-events:none;max-width:90%;text-align:center}
-#toast.on{opacity:1}
-footer{text-align:center;padding:16px;opacity:.6}
-@media(max-width:600px){.stats{grid-template-columns:repeat(2,1fr)}.tray{grid-template-columns:repeat(3,1fr)}.controls{grid-template-columns:1fr}header h1{font-size:22px}}
-.ingredient-icon{width:1em;height:1em;vertical-align:-.12em;overflow:visible}
+label{display:block;margin:9px 0 4px;font-weight:700}input[type=range]{width:100%;accent-color:var(--green)}
+#result{text-align:center;background:#f1f9e8;padding:13px;border-radius:12px;margin-top:12px;min-height:55px;line-height:1.8}
+.inventory-row{display:grid;grid-template-columns:1fr auto auto;gap:8px;align-items:center;padding:8px 0;border-bottom:1px solid #eee}
+.inventory-row:last-child{border:0}.stock-low{color:#b44;font-weight:700}.muted{color:#806d55;font-size:13px}
+.log{max-height:180px;overflow:auto;font-size:13px;line-height:1.8}
+.review{padding:9px;border-bottom:1px solid #eee}.stars{color:#d79512;letter-spacing:2px}
+.locked{opacity:.55}.recipe-card{border:1px solid #eee;border-radius:10px;padding:10px;margin:7px 0}
+footer{text-align:center;padding:20px;color:#777}
+@media(max-width:760px){.stats{grid-template-columns:repeat(2,1fr)}.game-grid{grid-template-columns:1fr}.ingredients{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:420px){.ingredients{grid-template-columns:repeat(2,1fr)}.controls{grid-template-columns:1fr}.container{padding:10px}}
 </style>
 </head>
 <body>
-<header><button id="mute" onclick="toggleMute()">🔊</button>
-<h1>🌶️ ร้านส้มตำแซ่บนัว 🥗</h1><p>ลากวัตถุดิบลงครก แล้วตำให้แซ่บ!</p></header>
-<div class="container">
-<div class="stats">
-<div class="stat">💰 เงิน<span id="money">0</span></div>
-<div class="stat">⭐ คะแนน<span id="score">0</span></div>
-<div class="stat">🏆 เลเวล<span id="level">1</span></div>
-<div class="stat">🥬 วัตถุดิบ<span id="stock">0</span></div>
-</div>
-<section class="panel"><h2>📋 ภารกิจประจำร้าน</h2><p id="mission"></p><div class="bar"><div id="prog"></div></div></section>
-<section class="order" id="orderBox">
-<h2>🧑‍🍳 ลูกค้าคนต่อไป</h2>
-<div><span class="big" id="face">⏳</span> <span id="cust">กำลังรอลูกค้า...</span></div>
-<h3 id="req">กดปุ่มรับลูกค้าเพื่อเริ่มเล่น</h3>
-<p id="timer">⏱️ -</p>
-<button class="sec" id="orderBtn" onclick="newOrder()">รับลูกค้า</button>
-</section>
-<section class="panel">
-<h2>🥣 ครกส้มตำ</h2>
-<div id="mortarBox">
-<svg id="mortarSvg" viewBox="40 0 220 215" xmlns="http://www.w3.org/2000/svg">
-<ellipse cx="150" cy="210" rx="70" ry="5" fill="#0002"/>
-<g id="bowl">
-<ellipse cx="150" cy="125" rx="82" ry="19" fill="#7a4a24"/>
-<ellipse cx="150" cy="126" rx="74" ry="14" fill="#5e3818"/>
-<g id="food"></g>
-<path d="M68 125A82 19 0 0 0 232 125Q236 198 150 208Q64 198 68 125Z" fill="#c68a53" stroke="#8a5a2c" stroke-width="3"/>
-<path d="M88 150Q100 185 130 196" stroke="#e2b17a" stroke-width="6" fill="none" stroke-linecap="round" opacity=".7"/>
-<circle cx="125" cy="165" r="3" fill="#8a5a2c"/><circle cx="175" cy="172" r="3" fill="#8a5a2c"/>
-<circle cx="150" cy="185" r="3" fill="#8a5a2c"/>
-</g>
-<g id="pestle"><g transform="rotate(14 150 110)"><rect x="142" y="-30" width="16" height="136" rx="8" fill="#b4733a" stroke="#7b4a20" stroke-width="2"/><ellipse cx="150" cy="108" rx="12" ry="10" fill="#9a5f2b" stroke="#7b4a20" stroke-width="2"/></g></g>
-<text x="60" y="30" font-size="12" fill="currentColor" opacity=".6">ลากวัตถุดิบมาวางที่นี่</text>
-</svg>
-</div>
-<div class="tray" id="tray"></div>
-<p>ในครก: <b id="selText">ยังไม่ได้เลือก</b></p>
-<h2 style="margin-top:14px">🧂 ปรุงรส</h2>
-<div class="controls"><div>
-<label>🌶️ เผ็ด: <span id="spicyV">3</span></label><input type="range" id="spicy" min="0" max="5" value="3" oninput="sv('spicy')">
-<label>🍋 เปรี้ยว: <span id="sourV">3</span></label><input type="range" id="sour" min="0" max="5" value="3" oninput="sv('sour')"></div><div>
-<label>🍬 หวาน: <span id="sweetV">3</span></label><input type="range" id="sweet" min="0" max="5" value="3" oninput="sv('sweet')">
-<label>🧂 เค็ม: <span id="saltyV">3</span></label><input type="range" id="salty" min="0" max="5" value="3" oninput="sv('salty')"></div></div>
-<button class="main" id="makeBtn" disabled onclick="makeSomtam()">🥢 ตำส้มตำ!</button>
-<div id="result">รับลูกค้าและลากวัตถุดิบลงครกก่อนเริ่มตำ</div>
-</section>
-<section class="panel">
-<h2>🏪 ร้านของฉัน <small id="mult"></small></h2>
-<div id="scene"></div>
-<div class="row" id="shop"></div>
-</section>
-<section class="panel"><h2>📜 ประวัติการขาย</h2><div id="history" class="log">ยังไม่มีประวัติ</div></section>
-<section class="panel"><h2>🏆 สถิติ</h2><p>คะแนนสูงสุด: <b id="best">0</b> | เสิร์ฟทั้งหมด: <b id="total">0</b> | เมนูพิเศษปลดล็อกที่เลเวล 2</p>
-<button class="danger" onclick="resetGame()">เริ่มเกมใหม่</button></section>
-</div>
-<footer>🌶️ ร้านส้มตำแซ่บนัว</footer>
-<div id="toast"></div>
+<header><h1>🌶️ ร้านส้มตำแซ่บนัว 🥗</h1><p>Somtam Arcade — ทำไว เสิร์ฟทัน ปลดล็อกสูตรใหม่!</p></header>
+<main class="container">
+  <section class="stats">
+    <div class="stat">💰 เงิน<span id="money">100</span></div>
+    <div class="stat">⭐ คะแนน<span id="score">0</span></div>
+    <div class="stat">🏆 เลเวล<span id="level">1</span></div>
+    <div class="stat">🍽️ เสิร์ฟแล้ว<span id="served">0</span></div>
+    <div class="stat">📅 วันที่<span id="day">1</span></div>
+  </section>
+
+  <section class="mission">
+    <div class="top-actions" style="justify-content:space-between;align-items:center">
+      <b>🎯 ภารกิจรอบนี้</b><span class="badge" id="shiftStatus">ยังไม่เริ่มกะ</span>
+    </div>
+    <p id="missionText">เริ่มกะเพื่อรับลูกค้า ทำออเดอร์ให้ได้มากที่สุดภายใน 3 นาที!</p>
+    <div class="progress"><div id="shiftProgress"></div></div>
+    <p class="muted" id="shiftTimer">⏱️ เวลาในกะ: 03:00</p>
+    <div class="top-actions">
+      <button id="startBtn" onclick="startShift()">▶️ เริ่มกะ 3 นาที</button>
+      <button class="secondary" onclick="spawnCustomer()" id="manualCustomerBtn" disabled>➕ เรียกลูกค้าเพิ่ม</button>
+    </div>
+  </section>
+
+  <div class="game-grid">
+    <div>
+      <section class="panel">
+        <h2>🧑‍🍳 คิวลูกค้า</h2>
+        <p class="muted">เลือกลูกค้าในคิวเพื่อทำออเดอร์ ลูกค้าแต่ละคนมีเวลารอของตัวเอง</p>
+        <div id="queue"><p class="muted">ยังไม่มีลูกค้า — กดเริ่มกะได้เลย</p></div>
+      </section>
+      <section class="panel">
+        <h2>🥗 ออเดอร์ที่กำลังทำ</h2>
+        <div id="activeOrder"><p class="muted">เลือกลูกค้าจากคิวเพื่อเริ่มทำอาหาร</p></div>
+        <div class="recipe" id="recipePanel" hidden>
+          <b>📖 สูตรตามออเดอร์: <span id="recipeName"></span></b>
+          <div id="recipeIngredients"></div>
+          <hr><b>🧂 รสชาติที่ลูกค้าต้องการ</b><div id="recipeTaste"></div>
+        </div>
+      </section>
+      <section class="panel">
+        <h2>🥬 เลือกวัตถุดิบใส่ครก</h2>
+        <p class="muted">กดเลือกวัตถุดิบให้ครบตามสูตร ระบบจะหักสต็อกเมื่อเสิร์ฟ</p>
+        <div class="ingredients" id="ingredients"></div>
+        <p>เลือกแล้ว: <b id="selectedText">ยังไม่ได้เลือก</b></p>
+        <div class="controls">
+          <div>
+            <label>🌶️ เผ็ด: <span id="spicyVal">3</span></label><input type="range" id="spicy" min="0" max="5" value="3" oninput="showValue('spicy')">
+            <label>🍋 เปรี้ยว: <span id="sourVal">3</span></label><input type="range" id="sour" min="0" max="5" value="3" oninput="showValue('sour')">
+          </div>
+          <div>
+            <label>🍬 หวาน: <span id="sweetVal">3</span></label><input type="range" id="sweet" min="0" max="5" value="3" oninput="showValue('sweet')">
+            <label>🧂 เค็ม: <span id="saltyVal">3</span></label><input type="range" id="salty" min="0" max="5" value="3" oninput="showValue('salty')">
+          </div>
+        </div>
+        <button class="main-btn" id="makeBtn" onclick="makeSomtam()" disabled>🥢 ตำส้มตำและเสิร์ฟ!</button>
+        <div id="result">เริ่มกะ เลือกลูกค้า และทำตามสูตรให้ทันเวลา</div>
+      </section>
+    </div>
+
+    <div>
+      <section class="panel">
+        <h2>📦 คลังวัตถุดิบ</h2>
+        <p class="muted">วัตถุดิบสดเก็บได้ 3 วันในเกม ของหมดอายุจะถูกตัดออกอัตโนมัติ</p>
+        <div id="inventory"></div>
+        <div class="menu-list" style="margin-top:12px">
+          <button class="secondary" onclick="buyStock()">🛒 ซื้อวัตถุดิบรวม 50 บาท</button>
+          <button onclick="buyFreshPack()">🥬 ซื้อชุดสด 100 บาท</button>
+        </div>
+      </section>
+      <section class="panel">
+        <h2>🔓 สูตรอาหารและเมนู</h2>
+        <p class="muted">ปลดล็อกเมนูใหม่ด้วยคะแนนสะสมจากการเสิร์ฟ</p>
+        <div id="recipeBook"></div>
+      </section>
+      <section class="panel">
+        <h2>⭐ รีวิวจากลูกค้า</h2>
+        <p>คะแนนรีวิวเฉลี่ย: <b id="avgReview">ยังไม่มีรีวิว</b></p>
+        <div id="reviews" class="log">ยังไม่มีรีวิว</div>
+      </section>
+      <section class="panel">
+        <h2>🏪 อัปเกรดร้าน</h2>
+        <p>ระดับร้าน: <b id="upgradeLevel">1</b> — เพิ่มรายได้ต่อจาน</p>
+        <button onclick="buyUpgrade()">⭐ อัปเกรดร้าน (150 บาท)</button>
+      </section>
+      <section class="panel">
+        <h2>📜 ประวัติการขาย</h2><div id="history" class="log">ยังไม่มีประวัติ</div>
+      </section>
+      <section class="panel">
+        <h2>🏅 สถิติผู้เล่น</h2>
+        <p>คะแนนสูงสุด: <b id="best">0</b></p><p>ลูกค้าเสิร์ฟทั้งหมด: <b id="total">0</b></p>
+        <button class="danger" onclick="resetGame()">เริ่มเกมใหม่</button>
+      </section>
+    </div>
+  </div>
+</main>
+<footer>🌶️ ร้านส้มตำแซ่บนัว | Somtam Arcade</footer>
+
 <script>
-const $=id=>document.getElementById(id);
+"use strict";
 const items=[
-{id:"papaya",name:"มะละกอ",e:"🥬",n:16},{id:"tomato",name:"มะเขือเทศ",e:"🍅",n:5},
-{id:"bean",name:"ถั่วฝักยาว",e:"🫛",n:6},{id:"chili",name:"พริก",e:"🌶️",n:6},
-{id:"lime",name:"มะนาว",e:"🍋",n:4},{id:"fish",name:"น้ำปลา",e:"🧂",n:0},
-{id:"sugar",name:"น้ำตาล",e:"🍬",n:5},{id:"fermented",name:"ปลาร้า",e:"🐟",n:3},
-{id:"peanut",name:"ถั่วลิสง",e:"🥜",n:8},{id:"egg",name:"ไข่เค็ม",e:"🥚",n:2},
-{id:"shrimp",name:"กุ้งแห้ง",e:"🦐",n:7}];
+ {id:"papaya",name:"มะละกอ",emoji:"🥬",unit:"กำมือ"},
+ {id:"tomato",name:"มะเขือเทศ",emoji:"🍅",unit:"ลูก"},
+ {id:"bean",name:"ถั่วฝักยาว",emoji:"🫛",unit:"ฝัก"},
+ {id:"chili",name:"พริก",emoji:"🌶️",unit:"เม็ด"},
+ {id:"lime",name:"มะนาว",emoji:"🍋",unit:"ลูก"},
+ {id:"fish",name:"น้ำปลา",emoji:"🧂",unit:"ช้อน"},
+ {id:"sugar",name:"น้ำตาล",emoji:"🍬",unit:"ช้อน"},
+ {id:"fermented",name:"ปลาร้า",emoji:"🐟",unit:"ช้อน"},
+ {id:"peanut",name:"ถั่วลิสง",emoji:"🥜",unit:"ช้อน"},
+ {id:"crab",name:"ปูดอง",emoji:"🦀",unit:"ตัว"},
+ {id:"corn",name:"ข้าวโพด",emoji:"🌽",unit:"ฝัก"},
+ {id:"shrimp",name:"กุ้ง",emoji:"🦐",unit:"ตัว"}
+];
 const recipes=[
-{name:"ตำไทย",need:["papaya","tomato","bean","lime","fish","sugar","peanut"],spicy:2,sour:3,sweet:3,salty:2},
-{name:"ตำปูปลาร้า",need:["papaya","tomato","bean","chili","lime","fermented"],spicy:4,sour:3,sweet:1,salty:4},
-{name:"ตำเผ็ดนรก",need:["papaya","tomato","chili","lime","fish","fermented"],spicy:5,sour:3,sweet:1,salty:3},
-{name:"ตำหวาน",need:["papaya","tomato","lime","fish","sugar","peanut"],spicy:1,sour:2,sweet:5,salty:2}];
-const specials=[
-{name:"ตำไข่เค็ม ✨",need:["papaya","tomato","bean","lime","fish","egg"],spicy:2,sour:3,sweet:2,salty:4},
-{name:"ตำทะเลแซ่บ ✨",need:["papaya","tomato","chili","lime","fish","shrimp","peanut"],spicy:3,sour:4,sweet:2,salty:3}];
-const decorList=[{id:"plant",e:"🪴",n:"ต้นไม้",c:60},{id:"lamp",e:"🏮",n:"โคมไฟ",c:80},{id:"flower",e:"🌺",n:"แจกัน",c:100},{id:"sign",e:"🪧",n:"ป้ายเก๋",c:120},{id:"music",e:"🎶",n:"ลำโพงหมอลำ",c:150},{id:"ac",e:"❄️",n:"แอร์",c:200}];
-let money=100,score=0,served=0,total=0,stock=30,tables=2,decor=[],best=0;
-let selected=[],cur=null,vip=false,time=0,clock=null,active=false,busy=false,mixed=false;
-try{best=Number(localStorage.getItem("somtamBest")||0)}catch(e){}
-const level=()=>1+Math.floor(total/5);
-const mult=()=>+(1+decor.length*.1+(tables-2)*.1).toFixed(2);
-let tt;function toast(m){const t=$("toast");t.textContent=m;t.classList.add("on");clearTimeout(tt);tt=setTimeout(()=>t.classList.remove("on"),1800)}
-/* sound */
-let ac,mute=false;
-function tone(f,d,ty="sine",v=.2,t=0,f2){if(mute)return;try{ac=ac||new(window.AudioContext||window.webkitAudioContext)();if(ac.state==="suspended")ac.resume();
-const o=ac.createOscillator(),g=ac.createGain(),s=ac.currentTime+t;o.type=ty;o.frequency.setValueAtTime(f,s);
-if(f2)o.frequency.exponentialRampToValueAtTime(f2,s+d);g.gain.setValueAtTime(v,s);g.gain.exponentialRampToValueAtTime(.001,s+d);
-o.connect(g);g.connect(ac.destination);o.start(s);o.stop(s+d)}catch(e){}}
-const sfx={thump(){tone(150,.2,"sine",.5,0,45);tone(1000,.04,"square",.05)},pick(){tone(620,.08,"triangle",.15)},
-ding(){tone(880,.4,"sine",.25);tone(1320,.5,"sine",.2,.12)},coin(){tone(1200,.1,"square",.08);tone(1700,.2,"square",.08,.09)},
-bad(){tone(320,.45,"sawtooth",.13,0,110)},swish(){tone(250,.3,"triangle",.1,0,800)},clink(){tone(2000,.15,"sine",.15);tone(2600,.2,"sine",.1,.05)},vip(){[660,880,1100].forEach((f,i)=>tone(f,.22,"triangle",.2,i*.1))}};
-function toggleMute(){mute=!mute;$("mute").textContent=mute?"🔇":"🔊"}
-/* food art */
-function piece(id,x,y,a){const g=`<g transform="translate(${x.toFixed(1)} ${y.toFixed(1)}) rotate(${a.toFixed(0)})">`;
-const m={papaya:'<rect x="-7" y="-1.5" width="14" height="3" rx="1.5" fill="#dfeaa0"/>',
-tomato:'<circle r="4.6" fill="#e5483a"/><circle cx="-1.3" cy="-1.3" r="1.2" fill="#ff9a8a"/>',
-bean:'<rect x="-8" y="-2" width="16" height="4" rx="2" fill="#4a9a3a"/>',
-chili:'<ellipse rx="6" ry="2.2" fill="#d6281d"/>',
-lime:'<circle r="4" fill="#b9dc3c" stroke="#7fa81c"/>',
-peanut:'<circle r="3" fill="#d9a566"/>',
-sugar:'<rect x="-2.5" y="-2.5" width="5" height="5" fill="#fff" stroke="#ccc" stroke-width=".5"/>',
-fermented:'<ellipse rx="6" ry="3.5" fill="#7a5a3a" opacity=".85"/>',
-egg:'<circle r="5.5" fill="#f6c244" stroke="#e29a20"/>',
-shrimp:'<ellipse rx="5" ry="2.5" fill="#ee8a4a"/>'};
-return g+(m[id]||"")+"</g>"}
-function foodSVG(list,mx){let o="";
-if(list.includes("fish"))o+='<ellipse cx="150" cy="128" rx="60" ry="11" fill="#c98a2b" opacity=".45"/>';
-items.forEach((it,k)=>{if(!list.includes(it.id))return;let s=k*37+11;const r=()=>(s=(s*9301+49297)%233280)/233280;
-for(let i=0;i<it.n;i++){const d=r()*2-1;o+=piece(it.id,150+d*(mx?50:58),124+(r()*2-1)*(mx?5:8)-(1-Math.abs(d))*(mx?3:7),r()*180)}});
-if(mx&&list.length){const sp=+$("spicy").value;o+=`<ellipse cx="150" cy="125" rx="58" ry="10" fill="rgb(${190+sp*12},${140-sp*18},50)" opacity=".3"/>`}
-return o}
-function drawMortar(){$("food").innerHTML=foodSVG(selected,mixed)}
-/* tray & drag */
-
-/* Draw yardlong beans directly so older devices do not need the pea-pod emoji. */
-function ingredientIcon(it){
- if(it.id!=="bean")return it.e;
- return '<svg class="ingredient-icon" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false"><path d="M9 5C7 15 18 23 12 35M18 5C12 17 27 24 20 36M27 6C22 17 34 24 29 34" fill="none" stroke="#398344" stroke-width="5" stroke-linecap="round"/><path d="M9 5L11 2M18 5L20 2M27 6L29 3" stroke="#7b9b35" stroke-width="2" stroke-linecap="round"/><path d="M9 10L12 16M18 10L19 16M27 11L28 17" stroke="#80b957" stroke-width="1.5" stroke-linecap="round"/></svg>';
-}
-
-function renderTray(){const t=$("tray");t.innerHTML="";items.forEach(it=>{const b=document.createElement("button");b.className="ing";b.id="i_"+it.id;
-b.innerHTML=`<span class="e">${ingredientIcon(it)}</span>${it.name}`;bind(b,it);t.appendChild(b)});refresh()}
-let drag=null;
-const inM=e=>{const r=$("mortarBox").getBoundingClientRect();return e.clientX>=r.left&&e.clientX<=r.right&&e.clientY>=r.top&&e.clientY<=r.bottom};
-function bind(b,it){
-b.addEventListener("pointerdown",e=>{drag={it,x:e.clientX,y:e.clientY,mv:false,g:null};try{b.setPointerCapture(e.pointerId)}catch(_){}});
-b.addEventListener("pointermove",e=>{if(!drag)return;if(!drag.mv&&Math.hypot(e.clientX-drag.x,e.clientY-drag.y)>8){drag.mv=true;const g=document.createElement("div");g.className="ghost";g.innerHTML=ingredientIcon(it);document.body.appendChild(g);drag.g=g}
-if(drag.mv){drag.g.style.left=e.clientX+"px";drag.g.style.top=e.clientY+"px";$("mortarBox").classList.toggle("over",inM(e))}});
-const end=(e,ok)=>{if(!drag)return;const d=drag;drag=null;if(d.g)d.g.remove();$("mortarBox").classList.remove("over");if(!ok)return;
-if(!d.mv)toggle(it.id);else if(inM(e))add(it.id)};
-b.addEventListener("pointerup",e=>end(e,true));b.addEventListener("pointercancel",e=>end(e,false))}
-function add(id){if(!active)return toast("กดรับลูกค้าก่อนนะ");if(!selected.includes(id)){selected.push(id);sfx.pick();refresh()}}
-function toggle(id){if(!active)return toast("กดรับลูกค้าก่อนนะ");selected.includes(id)?selected=selected.filter(x=>x!==id):selected.push(id);sfx.pick();refresh()}
-function refresh(){items.forEach(it=>$("i_"+it.id)?.classList.toggle("sel",selected.includes(it.id)));
-$("selText").textContent=selected.length?selected.map(i=>items.find(x=>x.id===i).name).join(", "):"ยังไม่ได้เลือก";drawMortar()}
-function sv(id){$(id+"V").textContent=$(id).value;if(mixed)drawMortar()}
-/* game */
-function newOrder(){if(active||busy)return;
-const sp=level()>=2&&Math.random()<.6;vip=Math.random()<.15+decor.length*.03;
-cur=(vip&&sp)||(!vip&&sp&&Math.random()<.3)?specials[Math.floor(Math.random()*specials.length)]:recipes[Math.floor(Math.random()*recipes.length)];
-selected=[];mixed=false;active=true;time=vip?35:45;
-$("face").textContent=vip?"🤴":["😊","🧑","👩","😎"][Math.floor(Math.random()*4)];
-$("cust").textContent=vip?"👑 ลูกค้า VIP (จ่าย x2.5)":"ลูกค้า";
-$("orderBox").classList.toggle("vip",vip);
-$("req").textContent="ขอ "+cur.name+" เผ็ด "+cur.spicy+"/5";
-$("makeBtn").disabled=false;$("orderBtn").disabled=true;
-$("result").textContent="ลากวัตถุดิบลงครกแล้วตำเลย!";
-if(vip)sfx.vip();else sfx.pick();
-clearInterval(clock);$("timer").textContent="⏱️ "+time+" วินาที";
-clock=setInterval(()=>{time--;$("timer").textContent="⏱️ "+time+" วินาที";if(time<=0)failOrder()},1000);refresh()}
-function makeSomtam(){if(!active||busy)return;
-if(!selected.length)return toast("ลากวัตถุดิบลงครกก่อน!");
-if(stock<selected.length)return toast("วัตถุดิบไม่พอ! ซื้อเพิ่มที่ร้านค้า");
-clearInterval(clock);busy=true;active=false;$("makeBtn").disabled=true;
-$("pestle").classList.add("pound");$("bowl").classList.add("pound");
-let n=0;sfx.thump();const iv=setInterval(()=>{n++;sfx.thump();if(n>=6){clearInterval(iv);$("pestle").classList.remove("pound");$("bowl").classList.remove("pound");mixed=true;drawMortar();finish()}},380)}
-function finish(){
-const ok=cur.need.filter(x=>selected.includes(x)).length,miss=cur.need.length-ok,extra=selected.length-ok;
-let taste=0;["spicy","sour","sweet","salty"].forEach(k=>taste+=Math.abs(Number($(k).value)-cur[k]));
-const q=Math.max(0,100-miss*18-extra*10-taste*8);
-const reward=Math.round((20+q*.5)*mult()*(vip?2.5:1)),pts=Math.round(q/10)*(vip?2:1);
-const lv=level();stock-=selected.length;money+=reward;score+=pts;served++;total++;if(score>best)best=score;
-const msg=q>=85?"สุดยอด! ลูกค้าชอบมาก 🤩":q>=60?"อร่อยใช้ได้! 😋":"ยังต้องฝึกอีกนิดนะ 😅";
-$("result").innerHTML=`<div class="steamw">♨️ ♨️</div><svg class="plate" viewBox="60 95 180 85"><ellipse cx="150" cy="140" rx="85" ry="32" fill="#fff" stroke="#ccc" stroke-width="3"/><ellipse cx="150" cy="138" rx="68" ry="24" fill="#f2f2f2"/><g class="dish">${foodSVG(selected,true).replace(/translate\(([\d.]+) ([\d.]+)\)/g,(m,x,y)=>`translate(${x} ${+y+12})`)}</g></svg><h3>${msg}</h3>คุณภาพ ${q}/100 · +${reward} บาท · +${pts} คะแนน`;
-sfx.swish();setTimeout(sfx.clink,450);if(q>=60){setTimeout(sfx.ding,1000);setTimeout(sfx.coin,1350)}else setTimeout(sfx.bad,1000);
-if(level()>lv){toast("🎉 เลเวลอัป! ปลดล็อกเมนูพิเศษ");setTimeout(sfx.vip,500)}
-addHistory(cur.name,reward,q);
-setTimeout(()=>{if(!active){mixed=false;drawMortar()}},450);
-setTimeout(()=>{const f=$("face");f.textContent=q>=85?"🤩":q>=60?"😋":"😅";f.classList.remove("hop");void f.offsetWidth;f.classList.add("hop")},1000);
-selected=[];$("orderBtn").disabled=false;busy=false;
-$("timer").textContent="✅ ทำเสร็จแล้ว";$("orderBox").classList.remove("vip");save()}
-function failOrder(){clearInterval(clock);active=false;$("makeBtn").disabled=true;$("orderBtn").disabled=false;$("orderBox").classList.remove("vip");
-$("result").textContent="⏰ หมดเวลา! ลูกค้ากลับไปก่อน";$("timer").textContent="หมดเวลา";sfx.bad();selected=[];mixed=false;refresh()}
-function addHistory(n,r,q){const h=$("history");if(h.textContent==="ยังไม่มีประวัติ")h.textContent="";const p=document.createElement("div");p.textContent=`${vip?"👑":"🥗"} ${n} | ${r} บาท | คุณภาพ ${q}%`;h.prepend(p)}
-/* shop */
-function renderShop(){const s=$("shop");s.innerHTML="";
-const cost=100*tables;
-const a=document.createElement("button");a.textContent=tables>=8?"🏠 ร้านใหญ่สุดแล้ว":`🏠 ขยายร้าน +1 โต๊ะ (${cost})`;a.disabled=tables>=8;a.onclick=()=>buy(cost,()=>{tables++;toast("ขยายร้านแล้ว!")});s.appendChild(a);
-const b=document.createElement("button");b.textContent="🥬 ซื้อวัตถุดิบ +10 (30)";b.onclick=()=>buy(30,()=>{stock+=10});s.appendChild(b);
-decorList.forEach(d=>{const x=document.createElement("button");const has=decor.includes(d.id);x.textContent=has?`${d.e} ${d.n} ✓`:`${d.e} ${d.n} (${d.c})`;if(has){x.className="own";x.disabled=true}
-x.onclick=()=>buy(d.c,()=>{decor.push(d.id);toast("ตกแต่งร้านแล้ว!")});s.appendChild(x)})}
-function buy(c,fn){if(money<c){sfx.bad();return toast("เงินไม่พอ!")}money-=c;fn();sfx.coin();save()}
-function updateUI(){$("money").textContent=money;$("score").textContent=score;$("level").textContent=level();$("stock").textContent=stock;
-$("best").textContent=best;$("total").textContent=total;
-$("prog").style.width=(total%5)*20+"%";$("mission").textContent="เสิร์ฟให้ครบ "+(Math.floor(total/5)+1)*5+" คน เพื่อเลเวลอัป";
-$("mult").textContent="รายได้ ×"+mult();
-$("scene").innerHTML=decor.map(i=>decorList.find(d=>d.id===i).e).join(" ")+"<br>"+"🍽️".repeat(tables)+"<br>🪑".repeat(0)+"🪑".repeat(tables);
-renderShop()}
-function save(){try{localStorage.setItem("somtamSave2",JSON.stringify({money,score,served,total,stock,tables,decor}));localStorage.setItem("somtamBest",best)}catch(e){}updateUI()}
-function load(){try{const d=JSON.parse(localStorage.getItem("somtamSave2"));if(d){money=d.money??100;score=d.score??0;served=d.served??0;total=d.total??0;stock=d.stock??30;tables=d.tables??2;decor=d.decor??[]}}catch(e){}updateUI()}
-function resetGame(){if(!confirm("เริ่มเกมใหม่? เงิน คะแนน และร้านจะถูกรีเซ็ต"))return;
-clearInterval(clock);try{localStorage.removeItem("somtamSave2")}catch(e){}
-money=100;score=0;served=0;total=0;stock=30;tables=2;decor=[];selected=[];cur=null;active=false;busy=false;mixed=false;
-$("history").textContent="ยังไม่มีประวัติ";$("makeBtn").disabled=true;$("orderBtn").disabled=false;
-$("face").textContent="⏳";$("cust").textContent="กำลังรอลูกค้า...";$("req").textContent="กดปุ่มรับลูกค้าเพื่อเริ่มเล่น";
-$("timer").textContent="⏱️ -";$("result").textContent="เริ่มเกมใหม่แล้ว!";$("orderBox").classList.remove("vip");refresh();save()}
-renderTray();load();
+ {id:"thai",name:"ตำไทย",unlock:0,need:["papaya","tomato","bean","lime","fish","sugar","peanut"],amounts:["มะละกอ 1 กำมือ","มะเขือเทศ 2 ลูก","ถั่วฝักยาว 2 ฝัก","มะนาว 1 ลูก","น้ำปลา 1 ช้อน","น้ำตาล 1 ช้อน","ถั่วลิสง 1 ช้อน"],qty:{papaya:1,tomato:2,bean:2,lime:1,fish:1,sugar:1,peanut:1},taste:{spicy:2,sour:3,sweet:3,salty:2}},
+ {id:"pla",name:"ตำปูปลาร้า",unlock:0,need:["papaya","tomato","bean","chili","lime","fermented","fish"],amounts:["มะละกอ 1 กำมือ","มะเขือเทศ 2 ลูก","ถั่วฝักยาว 2 ฝัก","พริก 4 เม็ด","มะนาว 1 ลูก","ปลาร้า 2 ช้อน","น้ำปลา 1 ช้อน"],qty:{papaya:1,tomato:2,bean:2,chili:4,lime:1,fermented:2,fish:1},taste:{spicy:4,sour:3,sweet:1,salty:4}},
+ {id:"hell",name:"ตำเผ็ดนรก",unlock:0,need:["papaya","tomato","chili","lime","fish","fermented"],amounts:["มะละกอ 1 กำมือ","มะเขือเทศ 2 ลูก","พริก 10 เม็ด","มะนาว 1 ลูก","น้ำปลา 1 ช้อน","ปลาร้า 2 ช้อน"],qty:{papaya:1,tomato:2,chili:10,lime:1,fish:1,fermented:2},taste:{spicy:5,sour:3,sweet:1,salty:3}},
+ {id:"sweet",name:"ตำหวาน",unlock:0,need:["papaya","tomato","lime","fish","sugar","peanut"],amounts:["มะละกอ 1 กำมือ","มะเขือเทศ 2 ลูก","มะนาว 1 ลูก","น้ำปลา 1 ช้อน","น้ำตาล 2 ช้อน","ถั่วลิสง 2 ช้อน"],qty:{papaya:1,tomato:2,lime:1,fish:1,sugar:2,peanut:2},taste:{spicy:1,sour:2,sweet:5,salty:2}},
+ {id:"corn",name:"ตำข้าวโพด",unlock:80,need:["corn","tomato","lime","chili","fish","sugar","peanut"],amounts:["ข้าวโพด 1 ฝัก","มะเขือเทศ 2 ลูก","มะนาว 1 ลูก","พริก 3 เม็ด","น้ำปลา 1 ช้อน","น้ำตาล 1 ช้อน","ถั่วลิสง 1 ช้อน"],qty:{corn:1,tomato:2,lime:1,chili:3,fish:1,sugar:1,peanut:1},taste:{spicy:3,sour:3,sweet:2,salty:2}},
+ {id:"crab",name:"ตำปูม้า",unlock:180,need:["papaya","tomato","bean","crab","lime","chili","fish"],amounts:["มะละกอ 1 กำมือ","มะเขือเทศ 2 ลูก","ถั่วฝักยาว 2 ฝัก","ปูดอง 1 ตัว","มะนาว 1 ลูก","พริก 4 เม็ด","น้ำปลา 1 ช้อน"],qty:{papaya:1,tomato:2,bean:2,crab:1,lime:1,chili:4,fish:1},taste:{spicy:4,sour:4,sweet:1,salty:3}},
+ {id:"sea",name:"ตำทะเล",unlock:350,need:["papaya","shrimp","tomato","lime","chili","fish","fermented"],amounts:["มะละกอ 1 กำมือ","กุ้ง 3 ตัว","มะเขือเทศ 2 ลูก","มะนาว 1 ลูก","พริก 4 เม็ด","น้ำปลา 1 ช้อน","ปลาร้า 1 ช้อน"],qty:{papaya:1,shrimp:3,tomato:2,lime:1,chili:4,fish:1,fermented:1},taste:{spicy:4,sour:4,sweet:1,salty:3}}
+];
+const customers=["😊 ลูกค้าประจำ","🧑 ลูกค้าทั่วไป","👩 ลูกค้าหิวมาก","😎 ลูกค้าสายแซ่บ","👨‍🍳 นักชิมมือโปร","👵 คุณยายใจดี"];
+const SAVE_KEY="somtamArcadeSaveV2";
+let money=100,score=0,served=0,total=0,level=1,upgrade=1,best=Number(localStorage.getItem("somtamBest")||0);
+let day=1,shiftLeft=180,shiftRunning=false,shiftTimer=null,arrivalTimer=null,queue=[],activeId=null,selected=[],sales=[],reviews=[],inventory={},batchId=0;
+const $=id=>document.getElementById(id);
+function freshInventory(){const base={papaya:12,tomato:20,bean:16,chili:35,lime:12,fish:12,sugar:12,fermented:10,peanut:10,crab:0,corn:0,shrimp:0};inventory={};for(const [id,qty] of Object.entries(base))inventory[id]=[{qty,expires:day+3}];}
+function stockOf(id){return (inventory[id]||[]).reduce((n,b)=>n+(b.expires>day?b.qty:0),0)}
+function expireStock(){for(const id of Object.keys(inventory))inventory[id]=inventory[id].filter(b=>b.expires>day&&b.qty>0)}
+function save(){const d={money,score,served,total,level,upgrade,best,day,shiftLeft,queue,activeId,sales,reviews,inventory};localStorage.setItem(SAVE_KEY,JSON.stringify(d));localStorage.setItem("somtamBest",best);updateUI()}
+function load(){try{const raw=localStorage.getItem(SAVE_KEY);if(raw){const d=JSON.parse(raw);for(const k of ["money","score","served","total","level","upgrade","day","shiftLeft","queue","activeId","sales","reviews","inventory"])if(d[k]!==undefined)({money,score,served,total,level,upgrade,day,shiftLeft,queue,activeId,sales,reviews,inventory}[k]=d[k]);/* values restored below */money=d.money??money;score=d.score??score;served=d.served??served;total=d.total??total;level=d.level??level;upgrade=d.upgrade??upgrade;day=d.day??1;shiftLeft=180;queue=[];activeId=null;sales=d.sales??[];reviews=d.reviews??[];inventory=d.inventory??{};best=Math.max(best,d.best??0);}}catch(e){console.warn("Save load failed",e)}if(!Object.keys(inventory).length)freshInventory();expireStock();renderAll();updateUI()}
+function updateUI(){$("money").textContent=money;$("score").textContent=score;$("served").textContent=served;$("level").textContent=level;$("day").textContent=day;$("best").textContent=best;$("total").textContent=total;$("upgradeLevel").textContent=upgrade;$("shiftStatus").textContent=shiftRunning?"กำลังเปิดร้าน":"พักกะ";$("shiftTimer").textContent="⏱️ เวลาในกะ: "+formatTime(shiftLeft);$("shiftProgress").style.width=((180-shiftLeft)/180*100)+"%";$("startBtn").disabled=shiftRunning;$("manualCustomerBtn").disabled=!shiftRunning;$("missionText").textContent=`ภารกิจ: เสิร์ฟลูกค้าให้ได้ ${Math.max(5,Math.ceil((served+1)/5)*5)} คน | เสิร์ฟแล้ว ${served} คน`;renderInventory();renderRecipes();renderReviews();renderQueue();renderActiveOrder();renderHistory()}
+function formatTime(s){return String(Math.floor(s/60)).padStart(2,"0")+":"+String(s%60).padStart(2,"0")}
+function unlocked(r){return score>=r.unlock}
+function renderIngredients(){const box=$("ingredients");box.innerHTML="";items.forEach(it=>{const b=document.createElement("button");b.className="ingredient";b.dataset.id=it.id;b.innerHTML=`<span class="emoji">${it.emoji}</span>${it.name}<small>คงเหลือ ${stockOf(it.id)}</small>`;b.onclick=()=>toggleItem(it.id);box.appendChild(b)})}
+function toggleItem(id){if(!activeOrder())return;selected=selected.includes(id)?selected.filter(x=>x!==id):[...selected,id];renderIngredients();$("selectedText").textContent=selected.length?selected.map(x=>items.find(i=>i.id===x).name).join(", "):"ยังไม่ได้เลือก"}
+function renderInventory(){$("inventory").innerHTML=items.map(it=>{const batches=(inventory[it.id]||[]).filter(b=>b.qty>0&&b.expires>day);const expiry=batches.length?Math.min(...batches.map(b=>b.expires)):"-";const qty=stockOf(it.id);return `<div class="inventory-row"><span>${it.emoji} ${it.name}</span><b class="${qty<4?'stock-low':''}">${qty} ${it.unit}</b><span class="muted">${qty?`หมดอายุใกล้สุดวันที่ ${expiry}`:"หมดสต็อก"}</span></div>`}).join("")}
+function renderRecipes(){$("recipeBook").innerHTML=recipes.map(r=>`<div class="recipe-card ${unlocked(r)?"":"locked"}"><b>${unlocked(r)?"🔓":"🔒"} ${r.name}</b><div class="muted">${unlocked(r)?"ปลดล็อกแล้ว":`ต้องมี ${r.unlock} คะแนนเพื่อปลดล็อก`}</div></div>`).join("")}
+function renderReviews(){$("avgReview").textContent=reviews.length?(reviews.reduce((a,r)=>a+r.stars,0)/reviews.length).toFixed(1)+" / 5 ⭐":"ยังไม่มีรีวิว";$("reviews").innerHTML=reviews.length?reviews.slice(0,12).map(r=>`<div class="review"><span class="stars">${"★".repeat(r.stars)}${"☆".repeat(5-r.stars)}</span> ${escapeHTML(r.comment)}<div class="muted">${escapeHTML(r.name)} · ${escapeHTML(r.recipe)}</div></div>`).join(""):"ยังไม่มีรีวิว"}
+function renderHistory(){$("history").innerHTML=sales.length?sales.slice(0,20).map(s=>`<div>🥗 ${escapeHTML(s.recipe)} | ${s.reward} บาท | คุณภาพ ${s.quality}% | ${escapeHTML(s.date)}</div>`).join(""):"ยังไม่มีประวัติ"}
+function escapeHTML(s){return String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
+function activeOrder(){return queue.find(o=>o.id===activeId)||null}
+function renderQueue(){const q=$("queue");if(!queue.length){q.innerHTML='<p class="muted">ไม่มีลูกค้ารออยู่</p>';return}q.innerHTML=queue.map(o=>`<div class="orderbox ${o.id===activeId?"active-order":""}"><div class="order-head"><b>${escapeHTML(o.customer)}</b><span class="badge">เหลือ ${o.left} วิ</span></div><div>ขอ <b>${escapeHTML(o.recipeName)}</b></div><div class="order-meta">รางวัลพื้นฐาน 20–70 บาท · คิว #${o.number}</div><div class="queue-actions"><button class="small ${o.id===activeId?"secondary":""}" onclick="selectOrder(${o.id})">${o.id===activeId?"กำลังทำ":"เลือกออเดอร์"}</button><button class="small danger" onclick="abandonOrder(${o.id})">ยกเลิก</button></div></div>`).join("")}
+function renderActiveOrder(){const o=activeOrder();if(!o){$("activeOrder").innerHTML='<p class="muted">เลือกลูกค้าจากคิวเพื่อเริ่มทำอาหาร</p>';$("recipePanel").hidden=true;$("makeBtn").disabled=true;return}const r=recipes.find(x=>x.id===o.recipeId);$("activeOrder").innerHTML=`<b>${escapeHTML(o.customer)} ขอ ${escapeHTML(o.recipeName)}</b><p>⏳ เวลารอเหลือ <b>${o.left}</b> วินาที</p>`;$("recipePanel").hidden=false;$("recipeName").textContent=r.name;$("recipeIngredients").innerHTML=r.amounts.map(a=>`<div class="recipe-item">🥬 ${a}</div>`).join("");$("recipeTaste").innerHTML=Object.entries(r.taste).map(([k,v])=>`<div>${({spicy:"🌶️ เผ็ด",sour:"🍋 เปรี้ยว",sweet:"🍬 หวาน",salty:"🧂 เค็ม"})[k]}: ${v}/5</div>`).join("");$("makeBtn").disabled=!shiftRunning}
+function selectOrder(id){if(!shiftRunning)return;activeId=id;selected=[];$("selectedText").textContent="ยังไม่ได้เลือก";renderIngredients();renderQueue();renderActiveOrder();$("result").textContent="ทำตามสูตรและปรุงรสให้ตรงใจลูกค้า!"}
+function startShift(){if(shiftRunning)return;shiftRunning=true;shiftLeft=180;day=Math.max(1,day);expireStock();spawnCustomer();arrivalTimer=setInterval(()=>{if(shiftRunning&&queue.length<5)spawnCustomer()},11000);shiftTimer=setInterval(()=>{if(!shiftRunning)return;shiftLeft--;queue.forEach(o=>o.left--);const expired=queue.filter(o=>o.left<=0);expired.forEach(o=>{queue=queue.filter(x=>x.id!==o.id);if(o.id===activeId){activeId=null;selected=[]}$("result").textContent=`⏰ ${o.customer} รอนานเกินไปและเดินออกจากร้าน!`});if(shiftLeft<=0)endShift();else{renderAll();save()}},1000);renderAll();save()}
+function spawnCustomer(){if(!shiftRunning)return;if(queue.length>=5){$("result").textContent="คิวเต็มแล้ว! รีบเสิร์ฟลูกค้าก่อนรับเพิ่ม";return}const available=recipes.filter(unlocked);const r=available[Math.floor(Math.random()*available.length)];const o={id:++batchId,number:total+queue.length+1,customer:customers[Math.floor(Math.random()*customers.length)],recipeId:r.id,recipeName:r.name,left:45};queue.push(o);if(!activeId)activeId=o.id;renderAll();save()}
+function abandonOrder(id){queue=queue.filter(o=>o.id!==id);if(activeId===id){activeId=queue[0]?.id??null;selected=[]}renderAll();save()}
+function showValue(id){$(id+"Val").textContent=$(id).value}
+function consumeIngredients(recipe){for(const [id,amount] of Object.entries(recipe.qty)){let need=amount;const batches=(inventory[id]||[]).sort((a,b)=>a.expires-b.expires);for(const b of batches){const take=Math.min(need,b.qty);b.qty-=take;need-=take;if(need<=0)break}if(need>0)return false}return true}
+function canMake(recipe){return Object.entries(recipe.qty).every(([id,n])=>stockOf(id)>=n)}
+function makeSomtam(){const o=activeOrder();if(!shiftRunning||!o)return;const r=recipes.find(x=>x.id===o.recipeId);if(!r)return;if(!r.need.every(id=>selected.includes(id))){$("result").textContent="❗ วัตถุดิบยังไม่ครบตามสูตร!";return}if(!canMake(r)){const missing=Object.entries(r.qty).filter(([id,n])=>stockOf(id)<n).map(([id])=>items.find(x=>x.id===id).name);$("result").textContent="❗ วัตถุดิบไม่พอ: "+missing.join(", ")+" กรุณาซื้อเพิ่ม";return}
+ let extra=selected.filter(id=>!r.need.includes(id)).length;let tasteError=0;for(const k of Object.keys(r.taste))tasteError+=Math.abs(Number($(k).value)-r.taste[k]);const quality=Math.max(0,Math.round(100-extra*9-tasteError*8));consumeIngredients(r);const reward=Math.round((18+quality*.55)*upgrade);const points=Math.max(1,Math.round(quality/8));money+=reward;score+=points;served++;total++;if(served%5===0)level++;best=Math.max(best,score);const stars=quality>=90?5:quality>=75?4:quality>=55?3:quality>=35?2:1;const comments={5:"สุดยอดมาก อร่อยเหมือนร้านดัง!",4:"อร่อยมาก ไว้จะมาอีก",3:"รสชาติโอเคเลย",2:"ยังไม่ค่อยถูกปาก",1:"รสชาติยังไม่ตรงที่สั่ง"};reviews.unshift({stars,comment:comments[stars],name:o.customer,recipe:r.name});reviews=reviews.slice(0,40);sales.unshift({recipe:r.name,reward,quality,date:new Date().toLocaleString("th-TH")});sales=sales.slice(0,30);queue=queue.filter(x=>x.id!==o.id);activeId=queue[0]?.id??null;selected=[];$("selectedText").textContent="ยังไม่ได้เลือก";$("result").innerHTML=`<b>${"★".repeat(stars)}${"☆".repeat(5-stars)} ${stars}/5 ดาว</b><br>${comments[stars]}<br>คุณภาพ ${quality}/100 · ได้เงิน ${reward} บาท · +${points} คะแนน`;renderAll();save()}
+function buyStock(){if(money<50){alert("เงินไม่พอซื้อวัตถุดิบ");return}money-=50;for(const id of ["papaya","tomato","bean","chili","lime","fish","sugar","fermented","peanut"]){inventory[id]??=[];inventory[id].push({qty:5,expires:day+3})}renderAll();save();alert("ซื้อวัตถุดิบหลักเพิ่มอย่างละ 5 หน่วยแล้ว!")}
+function buyFreshPack(){if(money<100){alert("เงินไม่พอซื้อชุดวัตถุดิบ");return}money-=100;for(const id of ["crab","corn","shrimp"]){inventory[id]??=[];inventory[id].push({qty:id==="shrimp"?8:5,expires:day+3})}for(const id of ["papaya","tomato","bean","chili","lime"]){inventory[id]??=[];inventory[id].push({qty:5,expires:day+3})}renderAll();save();alert("ซื้อชุดวัตถุดิบพิเศษแล้ว!")}
+function buyUpgrade(){if(money<150){alert("เงินไม่พออัปเกรดร้าน");return}money-=150;upgrade++;renderAll();save();alert("อัปเกรดร้านสำเร็จ! รายได้ต่อจานเพิ่มขึ้น")}
+function endShift(){shiftRunning=false;clearInterval(shiftTimer);clearInterval(arrivalTimer);shiftTimer=arrivalTimer=null;queue=[];activeId=null;selected=[];shiftLeft=0;day++;expireStock();$("result").textContent=`🌙 หมดเวลากะแล้ว! วันนี้เสิร์ฟสะสม ${served} คน คะแนนรวม ${score} แต้ม วัตถุดิบที่หมดอายุถูกนำออกแล้ว`;renderAll();save()}
+function renderAll(){renderIngredients();renderInventory();renderRecipes();renderReviews();renderHistory();renderQueue();renderActiveOrder();updateUI()}
+function resetGame(){if(!confirm("ต้องการล้างความคืบหน้าและเริ่มเกมใหม่หรือไม่?"))return;clearInterval(shiftTimer);clearInterval(arrivalTimer);shiftRunning=false;money=100;score=0;served=0;total=0;level=1;upgrade=1;best=0;day=1;shiftLeft=180;queue=[];activeId=null;selected=[];sales=[];reviews=[];batchId=0;freshInventory();localStorage.removeItem(SAVE_KEY);localStorage.removeItem("somtamBest");$("result").textContent="เริ่มเกมใหม่แล้ว!";renderAll();save()}
+freshInventory();load();
 </script>
 </body>
 </html>
