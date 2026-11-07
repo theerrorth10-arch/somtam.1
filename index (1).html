@@ -2,7 +2,9 @@
 <html lang="th">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="theme-color" content="#398344">
 <title>ร้านส้มตำแซ่บนัว | Somtam Arcade</title>
 <style>
@@ -17,7 +19,7 @@ header h1{margin:0;font-size:clamp(24px,5vw,34px)}header p{margin:7px 0 0}
 .stat{text-align:center;font-weight:700}.stat span{display:block;font-size:22px;color:var(--green);margin-top:4px}
 .panel{margin-bottom:14px}h2{font-size:19px;margin:0 0 11px}
 button{border:0;border-radius:10px;padding:10px 13px;background:var(--green);color:#fff;font-weight:700;cursor:pointer;font-size:14px}
-button:hover{filter:brightness(.95)}button:disabled{opacity:.4;cursor:not-allowed}
+@media(hover:hover){button:hover{filter:brightness(.95)}}button:disabled{opacity:.4;cursor:not-allowed}
 .secondary{background:#d78b2d}.danger{background:var(--red)}.small{padding:7px 10px;font-size:12px}
 .main-btn{width:100%;font-size:18px;margin-top:13px;padding:13px}
 .top-actions,.menu-list{display:flex;flex-wrap:wrap;gap:8px}
@@ -83,6 +85,29 @@ footer{text-align:center;padding:20px;color:#777}
 #food{transform-origin:50% 100%;transform:scale(0)}.plated #food{transform:scale(1);transition:transform .5s cubic-bezier(.3,1.6,.5,1)}
 .s-serve #plate{transform:translate(-205px,-8px);transition:transform 1s ease-in-out}
 @media(prefers-reduced-motion:reduce){.stage *{animation-duration:.01s!important;transition-duration:.01s!important}}
+
+/* ===== รองรับมือถือ ===== */
+html{-webkit-text-size-adjust:100%}
+button,input[type=range]{touch-action:manipulation;-webkit-tap-highlight-color:transparent}
+button{user-select:none;-webkit-user-select:none;min-height:44px}
+button:active{transform:scale(.97)}
+input[type=range]{height:32px;margin:0}
+input[type=range]::-webkit-slider-thumb{width:26px;height:26px}
+input[type=range]::-moz-range-thumb{width:26px;height:26px}
+body{padding:0 env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left)}
+@media(max-width:760px){
+ header{padding:12px 10px}header p{font-size:13px}
+ .container{padding:10px}
+ .stats{grid-template-columns:repeat(3,1fr);gap:6px}.stat{padding:8px 4px;font-size:12px}.stat span{font-size:18px}
+ .panel{padding:12px}
+ .ingredients{grid-template-columns:repeat(3,1fr);gap:6px}.ingredient{min-height:76px;padding:8px 2px;font-size:13px}
+ .queue-actions button{flex:1}.queue-actions .small{min-height:40px}
+ .controls{grid-template-columns:1fr 1fr;gap:8px}label{font-size:13px}
+ .main-btn{position:sticky;bottom:calc(8px + env(safe-area-inset-bottom));z-index:5;box-shadow:0 4px 14px #0004;min-height:54px}
+ .menu-list button{flex:1 1 100%}
+ .top-actions button{flex:1}
+}
+@media(max-width:420px){.ingredients{grid-template-columns:repeat(3,1fr)}.ingredient .emoji{font-size:22px}.controls{grid-template-columns:1fr 1fr}.stat{font-size:11px}}
 </style>
 </head>
 <body>
@@ -263,17 +288,19 @@ function escapeHTML(s){return String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":
 function activeOrder(){return queue.find(o=>o.id===activeId)||null}
 function renderQueue(){const q=$("queue");if(!queue.length){q.innerHTML='<p class="muted">ไม่มีลูกค้ารออยู่</p>';return}q.innerHTML=queue.map(o=>`<div class="orderbox ${o.id===activeId?"active-order":""}"><div class="order-head"><b>${escapeHTML(o.customer)}</b><span class="badge">เหลือ ${o.left} วิ</span></div><div>ขอ <b>${escapeHTML(o.recipeName)}</b></div><div class="order-meta">รางวัลพื้นฐาน 20–70 บาท · คิว #${o.number}</div><div class="queue-actions"><button class="small ${o.id===activeId?"secondary":""}" onclick="selectOrder(${o.id})">${o.id===activeId?"กำลังทำ":"เลือกออเดอร์"}</button><button class="small danger" onclick="abandonOrder(${o.id})">ยกเลิก</button></div></div>`).join("")}
 function renderActiveOrder(){const o=activeOrder();if(!o){$("activeOrder").innerHTML='<p class="muted">เลือกลูกค้าจากคิวเพื่อเริ่มทำอาหาร</p>';$("recipePanel").hidden=true;$("makeBtn").disabled=true;return}const r=recipes.find(x=>x.id===o.recipeId);$("activeOrder").innerHTML=`<b>${escapeHTML(o.customer)} ขอ ${escapeHTML(o.recipeName)}</b><p>⏳ เวลารอเหลือ <b>${o.left}</b> วินาที</p>`;$("recipePanel").hidden=false;$("recipeName").textContent=r.name;$("recipeIngredients").innerHTML=r.amounts.map(a=>`<div class="recipe-item">🥬 ${a}</div>`).join("");$("recipeTaste").innerHTML=Object.entries(r.taste).map(([k,v])=>`<div>${({spicy:"🌶️ เผ็ด",sour:"🍋 เปรี้ยว",sweet:"🍬 หวาน",salty:"🧂 เค็ม"})[k]}: ${v}/5</div>`).join("");$("makeBtn").disabled=!shiftRunning||cooking}
-function selectOrder(id){if(!shiftRunning||cooking)return;activeId=id;selected=[];$("selectedText").textContent="ยังไม่ได้เลือก";renderIngredients();renderQueue();renderActiveOrder();$("result").textContent="ทำตามสูตรและปรุงรสให้ตรงใจลูกค้า!"}
+function selectOrder(id){if(!shiftRunning||cooking)return;activeId=id;selected=[];$("selectedText").textContent="ยังไม่ได้เลือก";renderIngredients();renderQueue();renderActiveOrder();$("result").textContent="ทำตามสูตรและปรุงรสให้ตรงใจลูกค้า!";scrollToEl("activeOrder","start")}
 function startShift(){if(shiftRunning)return;shiftRunning=true;shiftLeft=180;day=Math.max(1,day);expireStock();spawnCustomer();arrivalTimer=setInterval(()=>{if(shiftRunning&&queue.length<5)spawnCustomer()},11000);shiftTimer=setInterval(()=>{if(!shiftRunning)return;shiftLeft--;queue.forEach(o=>{if(o.id!==cookingId)o.left--});const expired=queue.filter(o=>o.left<=0);expired.forEach(o=>{queue=queue.filter(x=>x.id!==o.id);if(o.id===activeId){activeId=null;selected=[]}$("result").textContent=`⏰ ${o.customer} รอนานเกินไปและเดินออกจากร้าน!`;if(!stageBusy)playLeave(o)});if(shiftLeft<=0)endShift();else{renderAll();save()}},1000);renderAll();save()}
 function spawnCustomer(){if(!shiftRunning)return;if(queue.length>=5){$("result").textContent="คิวเต็มแล้ว! รีบเสิร์ฟลูกค้าก่อนรับเพิ่ม";return}const available=recipes.filter(unlocked);const r=available[Math.floor(Math.random()*available.length)];const o={id:++batchId,number:total+queue.length+1,customer:customers[Math.floor(Math.random()*customers.length)],recipeId:r.id,recipeName:r.name,left:45};queue.push(o);if(!activeId)activeId=o.id;renderAll();save()}
 function abandonOrder(id){if(cooking&&id===cookingId)return;queue=queue.filter(o=>o.id!==id);if(activeId===id){activeId=queue[0]?.id??null;selected=[]}renderAll();save()}
+const isMobile=()=>matchMedia("(max-width:760px)").matches;
+function scrollToEl(id,block){if(isMobile())setTimeout(()=>$(id).scrollIntoView({behavior:"smooth",block}),60)}
 function showValue(id){$(id+"Val").textContent=$(id).value}
 function consumeIngredients(recipe){for(const [id,amount] of Object.entries(recipe.qty)){let need=amount;const batches=(inventory[id]||[]).sort((a,b)=>a.expires-b.expires);for(const b of batches){const take=Math.min(need,b.qty);b.qty-=take;need-=take;if(need<=0)break}if(need>0)return false}return true}
 function canMake(recipe){return Object.entries(recipe.qty).every(([id,n])=>stockOf(id)>=n)}
 function starsOf(q){return q>=90?5:q>=75?4:q>=55?3:q>=35?2:1}
 function makeSomtam(){const o=activeOrder();if(!shiftRunning||!o||cooking)return;const r=recipes.find(x=>x.id===o.recipeId);if(!r)return;if(!r.need.every(id=>selected.includes(id))){$("result").textContent="❗ วัตถุดิบยังไม่ครบตามสูตร!";return}if(!canMake(r)){const missing=Object.entries(r.qty).filter(([id,n])=>stockOf(id)<n).map(([id])=>items.find(x=>x.id===id).name);$("result").textContent="❗ วัตถุดิบไม่พอ: "+missing.join(", ")+" กรุณาซื้อเพิ่ม";return}
  let extra=selected.filter(id=>!r.need.includes(id)).length;let tasteError=0;for(const k of Object.keys(r.taste))tasteError+=Math.abs(Number($(k).value)-r.taste[k]);const quality=Math.max(0,Math.round(100-extra*9-tasteError*8));
- cooking=true;cookingId=o.id;stageBusy=true;$("makeBtn").disabled=true;playServe(o,r,quality,starsOf(quality))}
+ cooking=true;cookingId=o.id;stageBusy=true;$("makeBtn").disabled=true;scrollToEl("stage","center");playServe(o,r,quality,starsOf(quality))}
 function commitServe(o,r,quality,stars){consumeIngredients(r);const reward=Math.round((18+quality*.55)*upgrade);const points=Math.max(1,Math.round(quality/8));money+=reward;score+=points;served++;total++;if(served%5===0)level++;best=Math.max(best,score);const comments={5:"สุดยอดมาก อร่อยเหมือนร้านดัง!",4:"อร่อยมาก ไว้จะมาอีก",3:"รสชาติโอเคเลย",2:"ยังไม่ค่อยถูกปาก",1:"รสชาติยังไม่ตรงที่สั่ง"};reviews.unshift({stars,comment:comments[stars],name:o.customer,recipe:r.name});reviews=reviews.slice(0,40);sales.unshift({recipe:r.name,reward,quality,date:new Date().toLocaleString("th-TH")});sales=sales.slice(0,30);queue=queue.filter(x=>x.id!==o.id);activeId=queue[0]?.id??null;selected=[];$("selectedText").textContent="ยังไม่ได้เลือก";$("result").innerHTML=`<b>${"★".repeat(stars)}${"☆".repeat(5-stars)} ${stars}/5 ดาว</b><br>${comments[stars]}<br>คุณภาพ ${quality}/100 · ได้เงิน ${reward} บาท · +${points} คะแนน`;renderAll();save();return comments[stars]}
 function buyStock(){if(money<50){alert("เงินไม่พอซื้อวัตถุดิบ");return}money-=50;for(const id of ["papaya","tomato","bean","chili","lime","fish","sugar","fermented","peanut"]){inventory[id]??=[];inventory[id].push({qty:5,expires:day+3})}renderAll();save();alert("ซื้อวัตถุดิบหลักเพิ่มอย่างละ 5 หน่วยแล้ว!")}
 function buyFreshPack(){if(money<100){alert("เงินไม่พอซื้อชุดวัตถุดิบ");return}money-=100;for(const id of ["crab","corn","shrimp"]){inventory[id]??=[];inventory[id].push({qty:id==="shrimp"?8:5,expires:day+3})}for(const id of ["papaya","tomato","bean","chili","lime"]){inventory[id]??=[];inventory[id].push({qty:5,expires:day+3})}renderAll();save();alert("ซื้อชุดวัตถุดิบพิเศษแล้ว!")}
